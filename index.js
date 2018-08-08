@@ -8,8 +8,11 @@ const config = {
   channelAccessToken: process.env.LINE_ACCESS_TOKEN, // from environment variable Set access token
   channelSecret: process.env.LINE_CHANNEL_SECRET, // Setting channel secret from environment variable
 };
+console.log(config);
 
-app.use(middleware(config));
+app.get('/', (req, res) => res.send('OK'));
+
+// app.use(middleware(config));
 
 app.post('/webhook', (req, res) => {
   res.json(req.body.events); // req.body will be webhook event object
@@ -27,4 +30,9 @@ app.use((err, req, res, next) => {
   next(err); // will throw default 500
 });
 
-app.listen(process.env.PORT || 3000);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, err => {
+  if (err) console.log(err);
+
+  console.log(`App start on port${PORT}`);
+});
