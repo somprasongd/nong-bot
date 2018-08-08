@@ -12,7 +12,7 @@ console.log(config);
 
 app.get('/', (req, res) => res.send('OK'));
 
-// app.use(middleware(config));
+app.use(middleware(config));
 
 app.post('/webhook', (req, res) => {
   res.json(req.body.events); // req.body will be webhook event object
